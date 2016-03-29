@@ -1,0 +1,56 @@
+<html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.6.1/lodash.js"></script>
+<script   src="https://code.jquery.com/jquery-2.2.2.min.js"   integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="   crossorigin="anonymous"></script>
+<script>
+  var results = 0;
+  var p = new Array();
+  var set= new Array();
+  var sum=0;
+  var count = 0;
+  function pickRandom(){
+
+    var r = _.random(1,99);
+ 
+    if(_.findIndex(set,r) > -1){
+  
+      r = pickRandom();
+    }
+    return r;
+  }
+
+
+function check(){
+  var r = pickRandom();
+ 
+  // $('#t').append("<tr><td>" + count + "</td><td>" + sum + "</td><td>" + r + "</td></tr>");
+
+    count++;
+    sum += r;
+    set.push(r); 
+  if(sum < 100){
+
+    check();
+  }
+  
+}
+
+ document.write('Starting program....');
+ 
+ for(var i = 0; i<1000000;i++){  
+   check();
+   
+   results += count;
+   p.push(count);
+   count = 0;
+   sum = 0;
+   set=new Array();
+}
+var avg = results/1000000;
+<br/>
+document.write("Total Number of runs: 1000000");
+document.write("Average number of rolls: " + avg);
+document.write("Avg money won $"+ Math.floor(avg)*100);
+
+</script>
+</html>
